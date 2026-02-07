@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgia Bartley | Tattoo Art Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #f4f4f4;
+            scroll-behavior: smooth;
+        }
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .old-german {
+            font-family: 'UnifrakturMaguntia', serif;
+            letter-spacing: 0.02em;
+        }
+        .gallery-item {
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        .overlay {
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 mix-blend-difference px-8 py-6 flex justify-between items-center">
+        <h1 class="text-2xl font-bold tracking-tighter uppercase old-german">GB</h1>
+        <div class="space-x-8 text-sm uppercase tracking-widest hidden md:flex">
+            <a href="#about" class="hover:text-zinc-400 transition">About</a>
+            <a href="#work" class="hover:text-zinc-400 transition">Portfolio</a>
+            <a href="https://www.instagram.com/novjchok/" target="_blank" class="hover:text-zinc-400 transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a]"></div>
+        </div>
+        <h2 class="text-7xl md:text-9xl old-german mb-4 z-10">Georgia Bartley</h2>
+        <p class="text-zinc-400 uppercase tracking-[0.3em] text-xs md:text-sm z-10 font-light">Fine Line & Illustrative Tattoo Artist</p>
+        <div class="mt-12 animate-bounce z-10">
+            <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-[#0d0d0d] px-4 md:px-12 border-t border-white/5">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-4xl old-german mb-8">Georgia Bartley</h3>
+            <p class="text-zinc-400 leading-relaxed text-lg mb-12 font-light">
+                Creating unique, permanent art tailored to the individual. My work focuses on precision fine-line, dark illustrative concepts, and custom botanical designs.
+            </p>
+            <a href="https://www.instagram.com/novjchok/" target="_blank" class="inline-block border border-zinc-700 px-10 py-4 hover:bg-white hover:text-black hover:border-white transition-all duration-500 uppercase text-[10px] tracking-[0.3em]">
+                Request a Consultation
+            </a>
+        </div>
+    </section>
+
+    <!-- Gallery (Work) Section -->
+    <main id="work" class="px-4 md:px-12 py-20 bg-[#0a0a0a] border-t border-white/5">
+        <div class="mb-16 text-center">
+            <h3 class="text-2xl old-german uppercase tracking-widest text-zinc-500">Selected Works</h3>
+        </div>
+        
+        <!-- Gallery Grid -->
+        <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Images will appear here once added to the array below -->
+        </div>
+
+        <!-- Empty State (Hidden if images exist) -->
+        <div id="empty-state" class="hidden text-center py-20 border border-dashed border-zinc-800 rounded-lg">
+            <p class="text-zinc-500 uppercase tracking-widest text-xs">No artwork added yet</p>
+            <p class="text-zinc-600 text-sm mt-2 italic">Add image URLs to the artwork array in the script tag.</p>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center text-zinc-700 text-[10px] uppercase tracking-[0.4em]">
+        &copy; 2026 Georgia E. Bartley. All rights reserved.
+    </footer>
+
+    <!-- Fullscreen Lightbox -->
+    <div id="lightbox" class="fixed inset-0 bg-black/98 z-[100] hidden flex items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" class="max-h-[90vh] max-w-full object-contain shadow-2xl border border-white/5">
+    </div>
+
+    <script>
+        const artwork = [
+            { id: 1, title: 'Portfolio Piece I', category: 'Recent Work', url: 'https://scontent-lhr8-1.cdninstagram.com/v/t51.75761-15/474119670_17850480786388632_9056433389847157343_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=MzU1MTkxMTY3NTc1MDUwMzYwMA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=-2W2PiTjPuwQ7kNvwESFq7f&_nc_oc=AdkaudXb5SAkTj8bUIpCOFteaFjstG-LI5JIQi36OekV_Wqj4ZjrOzq0kxnBlcUMvYlc1-eNR7fZwhMOytskHB5k&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_gid=zOeN4Hqx45r4yvYaEypvtQ&oh=00_AfstsxInjrzFJdk9p5S0R4PAhwi0VsXOOO42h6LavrRVdg&oe=698C4DF4' },
+            { id: 2, title: 'Portfolio Piece II', category: 'Recent Work', url: 'https://scontent-lhr8-1.cdninstagram.com/v/t51.82787-15/622211806_17896531914388632_8227722672701089721_n.jpg?stp=dst-jpg_e35_s1080x1080_tt6&_nc_cat=111&ig_cache_key=MzgxNzEwMzMyMTU1MTQwMDM1MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4OTk5LnNkci5DMyJ9&_nc_ohc=M0CnfwPbqOkQ7kNvwER0ARQ&_nc_oc=AdmmLNYrexxsDgjYJtfVhs-xLhJ_fjLEbmg20LCeQ5TkekMMp-KwYUNkZGBXQpL7uolSq_gK7XDHOutZBcg0iDxE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_gid=zOeN4Hqx45r4yvYaEypvtQ&oh=00_AftUOMmGn7gUYMErE-Di4VwB6yCn9t06ODXJbdQny_z7iw&oe=698C5C0E' },
+            { id: 3, title: 'Portfolio Piece III', category: 'Recent Work', url: 'https://scontent-lhr6-2.cdninstagram.com/v/t51.75761-15/499614356_17866872198388632_6540111989691448067_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ig_cache_key=MzYzODg4MDUxOTM5NTU0OTI0OA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=RMU9XdV1dU4Q7kNvwHU24lR&_nc_oc=Admx9YD9C7SwHJCpuMctNO5klBe6-tb62Ziqf_6etr7Ou8rz8eIHfC9itu9q216NkpwGNmJ-D4jEosM34X1msMYN&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lhr6-2.cdninstagram.com&_nc_gid=zOeN4Hqx45r4yvYaEypvtQ&oh=00_AfvmicjL1mnXhRP-x5bfTkywFfaqMSlEbg7JQNnM1D2dpA&oe=698C4AEE' },
+            { id: 4, title: 'Portfolio Piece IV', category: 'Recent Work', url: 'https://scontent-lhr6-1.cdninstagram.com/v/t51.75761-15/474515872_17850483630388632_3317251125175808151_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=MzU1MTkxNjg3MjU0MzQ0MTMxMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTAyNC5zZHIuQzMifQ%3D%3D&_nc_ohc=-T2vSVGidvkQ7kNvwFYn-sl&_nc_oc=AdkRSGt16Su9rp8XA2PD5xWBvmffGdy5eK0qOHi3oxqw4ublpQx6heC__1OUoDK36Cw31HCwo9lpSL294GAKy7GX&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_gid=zOeN4Hqx45r4yvYaEypvtQ&oh=00_AftRZWHHOm7vjswZmrxSs9LR-bwvLgOk-LFTr4FEKXzq0A&oe=698C56D0' },
+            { id: 5, title: 'Portfolio Piece V', category: 'Recent Work', url: 'https://scontent-lhr6-1.cdninstagram.com/v/t51.75761-15/474457990_17850482442388632_3800324031182974799_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ig_cache_key=MzU1MTkxMzc0NzM3NTc4NjY2Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=mhym6l7yo88Q7kNvwHwvDEL&_nc_oc=Adm8n6qRg7PCijUoMuzqJd0hj9krGYxur4m-DeWKOpscAf1XySjXVg1pcfsAgb_86o9oKcSHEz4DwBnF1_SRN-oh&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_gid=zOeN4Hqx45r4yvYaEypvtQ&oh=00_AfurMFfthYGuez_v-VaywzeNH5apkaW-P_mWUJSq0U84_w&oe=698C64DB' },
+            { id: 6, title: 'Portfolio Piece VI', category: 'Recent Work', url: 'https://scontent-lhr8-1.cdninstagram.com/v/t51.75761-15/472622528_17850479856388632_530781416121987726_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=MzU1MTkwNjU0MTc1NDQzMzM0OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=XoqP8wPPqzoQ7kNvwEwzymO&_nc_oc=AdmxqNs-GYghAyI9Rsk-uclonhjLNSa_FhH1N6x69uSmFMy2EfSL_xnZSa0svFA4kAX4_HkxnnP_lgyHThyoEV0Z&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_gid=Q3KenPtH3kjU_jOzXpiT9Q&oh=00_AftYPwGnVQn0YS_c5iu9Z2SRwCflDVim1a22t7tc51bxzg&oe=698C6210' }
+        ];
+
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            const empty = document.getElementById('empty-state');
+            
+            if (artwork.length === 0) {
+                grid.classList.add('hidden');
+                empty.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            empty.classList.add('hidden');
+
+            grid.innerHTML = artwork.map(item => `
+                <div class="gallery-item relative overflow-hidden bg-zinc-900 aspect-[4/5] cursor-pointer group rounded-sm" onclick="openLightbox('${item.url}')">
+                    <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000">
+                    <div class="overlay absolute inset-0 flex flex-col justify-end p-8">
+                        <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-400 mb-2">${item.category}</span>
+                        <h4 class="text-2xl old-german text-white">${item.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openLightbox(url) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = url;
+            lb.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onload = renderGallery;
+    </script>
+</body>
